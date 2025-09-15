@@ -1,3 +1,5 @@
+import 'package:diacare/screens/suggest_food.dart';
+import 'package:diacare/splash_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:firebase_core/firebase_core.dart'; // ✅ Make sure this is here
 import 'screens/home_screen.dart';
@@ -29,14 +31,18 @@ class DiaCareApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Diacare App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomeScreen(),
+      // home: SplashScreen(),
+      initialRoute: '/',
       routes: {
+        '/': (context) => const SplashScreen(),
+        '/home': (context)=> HomeScreen(),
         '/glucose_entry': (context) => GlucoseEntryScreen(),
         '/emergency': (context) => EmergencyScreen(),
         '/calculator': (context) => InsulinCalculatorScreen(),
         '/tips': (context) => TipsScreen(),
         '/logs': (context) => LogsScreen(),
         '/chart': (context) => GlucoseChartScreen(),
+        '/food_suggestions':(context)=> SuggestFood()
       },
     );
   }
