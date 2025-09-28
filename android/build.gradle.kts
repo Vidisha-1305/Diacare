@@ -3,6 +3,16 @@ allprojects {
         google()
         mavenCentral()
     }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.3.0") // your version
+        classpath("com.google.gms:google-services:4.4.3") // Firebase plugin
+    }
+}
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 val newBuildDir: Directory =

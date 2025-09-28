@@ -28,9 +28,8 @@ class HomeScreen extends StatelessWidget {
           children: [
             // Welcome Section
             Container(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.blue[400],
                 borderRadius: BorderRadius.circular(20),
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -41,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Welcome to DiaCare",
                     style: TextStyle(
                       fontSize: 20,
@@ -49,18 +48,19 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     "Manage your diabetes with ease",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white.withOpacity(0.9),
+                      // ✅ Replaced withOpacity with withValues
+                      color: Colors.white.withValues(alpha: 0.9),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
 
             // Quick Actions Grid
             Expanded(
@@ -69,13 +69,14 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     GridView(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 1.0,
-                      ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 1.0,
+                          ),
                       children: [
                         _buildFeatureCard(
                           context,
@@ -107,10 +108,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
+                    const SizedBox(height: 20),
+
                     // Suggest Food Button
-                    SizedBox(height: 20),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: 60,
                       child: ElevatedButton(
@@ -125,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           elevation: 0,
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.restaurant, size: 20),
@@ -141,33 +142,38 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
+
+                    // Additional Info Section
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            // ✅ Replaced withOpacity with withValues
+                            color: Colors.black.withValues(alpha: 0.05),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildInfoItem(Icons.timer, "Last Reading", "2h ago"),
+                          _buildInfoItem(
+                            Icons.trending_up,
+                            "Average",
+                            "120 mg/dL",
+                          ),
+                          _buildInfoItem(Icons.flag, "Status", "Normal"),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ),
-
-            // Additional Info Section
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildInfoItem(Icons.timer, "Last Reading", "2h ago"),
-                  _buildInfoItem(Icons.trending_up, "Average", "120 mg/dL"),
-                  _buildInfoItem(Icons.flag, "Status", "Normal"),
-                ],
               ),
             ),
           ],
@@ -176,7 +182,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFeatureCard(
+  static Widget _buildFeatureCard(
     BuildContext context, {
     required IconData icon,
     required String title,
@@ -185,9 +191,7 @@ class HomeScreen extends StatelessWidget {
   }) {
     return Card(
       elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () => Navigator.pushNamed(context, route),
@@ -197,9 +201,10 @@ class HomeScreen extends StatelessWidget {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                // ✅ Replaced withOpacity with withValues
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 10,
-                offset: Offset(0, 4),
+                offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -210,16 +215,13 @@ class HomeScreen extends StatelessWidget {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  // ✅ Replaced withOpacity with withValues
+                  color: color.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
-                  icon,
-                  size: 30,
-                  color: color,
-                ),
+                child: Icon(icon, size: 30, color: color),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 title,
                 style: TextStyle(
@@ -236,23 +238,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoItem(IconData icon, String label, String value) {
+  static Widget _buildInfoItem(IconData icon, String label, String value) {
     return Column(
       children: [
-        Icon(
-          icon,
-          size: 20,
-          color: Colors.grey[600],
-        ),
-        SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
-          ),
-        ),
-        SizedBox(height: 2),
+        Icon(icon, size: 20, color: Colors.grey[600]),
+        const SizedBox(height: 4),
+        Text(label, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+        const SizedBox(height: 2),
         Text(
           value,
           style: TextStyle(

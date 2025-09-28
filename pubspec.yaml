@@ -27,9 +27,11 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+# pubspec.yaml
 dependencies:
   flutter:
     sdk: flutter
+  firebase_auth: 6.0.2 # Use the latest version
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -56,8 +58,6 @@ dev_dependencies:
   url_launcher: ^6.3.1
 
   # ✅ Firebase (FlutterFire plugins — all must be from the same generation)
-  
-  firebase_auth: 
   firebase_core: ^4.1.0
   cloud_firestore: ^6.0.1
 

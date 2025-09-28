@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,21 +15,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Wait for 3 seconds then navigate
-    Timer(const Duration(seconds: 3), () {
+    _navigate();
+  }
+
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 3)); // Splash delay
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (!mounted) return;
+    if (user != null) {
+      // ✅ User is already signed in → go to Home
       Navigator.pushReplacementNamed(context, '/home');
-    });
+    } else {
+      // ❌ User not signed in → go to Login
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Set your theme color
+      backgroundColor: Colors.white, // Theme color
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // You can use an image or logo here
             Image.asset(
               'assets/logo.png', // Replace with your logo path
               height: 120,
